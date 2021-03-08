@@ -2,7 +2,9 @@ var can = document.getElementById("canvas");
 var ctx = can.getContext("2d");
 
 drawGrid();
-search();
+test();
+setStart();
+setTarget();
 
 function drawGrid() {
     ctx.strokeStyle = "black";
@@ -18,8 +20,7 @@ function drawGrid() {
     }
 } 
 
-
-async function search() {
+async function test() {
     ctx.strokeStyle = "black";
 
     for(var i = 0.5; i < 32; i++) {
@@ -28,15 +29,28 @@ async function search() {
             var y = j * 15;
             ctx.beginPath();
             ctx.rect(x,y,15,15);
+            ctx.fillStyle = "red";
+            ctx.fill();
+            await sleep(5);
             ctx.stroke();
-
-            if(i == 0.5 || j == 0.5) {
-                ctx.fillStyle = "grey";
-                ctx.fill();
-                await sleep(50);
-            }
         }
     }
+}
+
+function setStart() {
+    ctx.beginPath();
+    ctx.rect(0.5*15,0.5*15,15,15);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.stroke();
+}
+
+function setTarget() {
+    ctx.beginPath();
+    ctx.rect(31.5*15,31.5*15,15,15);
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.stroke();
 }
 
 function sleep(millis) {
