@@ -1,0 +1,10 @@
+#dfs {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
+#canvas { 
+    border: 3px solid black;
+}
