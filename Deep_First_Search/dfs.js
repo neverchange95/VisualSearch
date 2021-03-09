@@ -6,6 +6,53 @@ test();
 setStart();
 setTarget();
 
+class Node {
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinarySearchTree {
+    constructor() {
+        this.root = null;
+    }
+
+    insert(x,y) {
+        var newNode = new Node(x,y);
+        if(this.root === null) {
+            this.root = newNode;
+        } else {
+            this.insertNode(this.root, newNode);
+        }
+    }
+
+    insertNode(node, newNode) {
+        if(newNode.x === 0.5) {
+            if(node.left === null) {
+                node.left = newNode;
+            } else {
+                this.insertNode(node.left,newNode);
+            }
+        } else if(newNode.y === 0.5) {
+            if(node.right === null) {
+                node.right = newNode;
+            } else {
+                this.insertNode(node.right,newNode);
+            }
+        } else {
+            var help = this.root;
+            if(help.right === null) {
+                help.right = newNode;
+            } else {
+                this.insertNode(help.left,newNode);
+            }
+        }
+    }
+}
+
 function drawGrid() {
     ctx.strokeStyle = "black";
 
@@ -18,7 +65,7 @@ function drawGrid() {
             ctx.stroke();
         }
     }
-} 
+}
 
 async function test() {
     ctx.strokeStyle = "black";
