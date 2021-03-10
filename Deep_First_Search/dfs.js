@@ -1,63 +1,52 @@
 var can = document.getElementById("canvas");
 var ctx = can.getContext("2d");
 
+// s = start, e = end, 0 = wall, 1 = path
+grid = [
+    "1111111111111111111111111111111111",
+    "1000000000000000000000000000000001",
+    "1010111111111111100111111111110101",
+    "1010100001000000100001000000010101",
+    "1011101111111110111001011111010101",
+    "1000001000000010001001000100010101",
+    "1011101111111011101001110111011101",
+    "1011101111111011101001110111011101",
+    "1010101000001010001001010001000101",
+    "1010111011111010111001011101110101",
+    "1010000010000010100000000101000101",
+    "1010111110101110111111111101011101",
+    "1010100000101000000000000001010001",
+    "1010101011101111111111011111010101",
+    "1010101010100000000001010001010101",
+    "1010101010111110111111010111011101",
+    "1010101010100010100000000100000101",
+    "1010101010101110111111110111110101",
+    "1000101010101000000000010000010101",
+    "1011101110101111111001110111110101",
+    "1010000000100000000001000100010101",
+    "1010111110111011111101110101110101",
+    "1010100010001010000100010101000101",
+    "1011101110111010100111011101110101",
+    "1010001000101010100001010000010101",
+    "1010111011101010111101110111010101",
+    "1010100010100010000100000101000101",
+    "1010101110111011100111011101111101",
+    "1000100000101000100101010000000001",
+    "1000100000101000100101010000000001",
+    "1011101110101111111101010111110101",
+    "1010001010000000000000010100010101",
+    "101111101111111111111101110111111e",
+    "0000000000s00000000000000000000100",
+    "0000000000000000000000000000000000"]
+
 drawGrid();
 test();
-setStart();
-setTarget();
-
-class Node {
-    constructor(x,y) {
-        this.x = x;
-        this.y = y;
-        this.left = null;
-        this.right = null;
-    }
-}
-
-class BinarySearchTree {
-    constructor() {
-        this.root = null;
-    }
-
-    insert(x,y) {
-        var newNode = new Node(x,y);
-        if(this.root === null) {
-            this.root = newNode;
-        } else {
-            this.insertNode(this.root, newNode);
-        }
-    }
-
-    insertNode(node, newNode) {
-        if(newNode.x === 0.5) {
-            if(node.left === null) {
-                node.left = newNode;
-            } else {
-                this.insertNode(node.left,newNode);
-            }
-        } else if(newNode.y === 0.5) {
-            if(node.right === null) {
-                node.right = newNode;
-            } else {
-                this.insertNode(node.right,newNode);
-            }
-        } else {
-            var help = this.root;
-            if(help.right === null) {
-                help.right = newNode;
-            } else {
-                this.insertNode(help.left,newNode);
-            }
-        }
-    }
-}
 
 function drawGrid() {
     ctx.strokeStyle = "black";
 
-    for(var i = 0.5; i < 32; i++) {
-        for(var j = 0.5; j < 32; j++) {
+    for(var i = 0.5; i < 34; i++) {
+        for(var j = 0.5; j < 35; j++) {
             var x = i * 15;
             var y = j * 15;
             ctx.beginPath();
@@ -70,31 +59,41 @@ function drawGrid() {
 async function test() {
     ctx.strokeStyle = "black";
 
-    for(var i = 0.5; i < 32; i++) {
-        for(var j = 0.5; j < 32; j++) {
-            var x = i * 15;
-            var y = j * 15;
-            ctx.beginPath();
-            ctx.rect(x,y,15,15);
-            ctx.fillStyle = "red";
-            ctx.fill();
-            await sleep(5);
-            ctx.stroke();
+    for(var i = 0.5; i < 36; i++) {
+        for(var j = 0.5; j < 35; j++) {
+            if(grid[j-0.5][i-0.5] === '0') {
+                setWall(i,j);
+                await sleep(20);
+            } else if(grid[j-0.5][i-0.5] === 's') {
+                setStart(i,j);
+                await sleep(20);
+            } else if(grid[j-0.5][i-0.5] === 'e') {
+                setTarget(i,j);
+                await sleep(20);
+            }
         }
     }
 }
 
-function setStart() {
+function setWall(x,y) {
     ctx.beginPath();
-    ctx.rect(0.5*15,0.5*15,15,15);
+    ctx.rect(x*15,y*15,15,15);
     ctx.fillStyle = "red";
     ctx.fill();
     ctx.stroke();
 }
 
-function setTarget() {
+function setStart(x,y) {
     ctx.beginPath();
-    ctx.rect(31.5*15,31.5*15,15,15);
+    ctx.rect(x*15,y*15,15,15);
+    ctx.fillStyle = "green";
+    ctx.fill();
+    ctx.stroke();
+}
+
+function setTarget(x,y) {
+    ctx.beginPath();
+    ctx.rect(x*15,y*15,15,15);
     ctx.fillStyle = "blue";
     ctx.fill();
     ctx.stroke();
