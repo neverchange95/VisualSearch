@@ -4,14 +4,26 @@
         <meta charset="UTF-8">
         <meta name="Author" content="Michael Küchenmeister"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital@1&family=Roboto:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css"/>
         <title>Suche</title>
     </head>
     <body>
-        <div id="dfs">
-            <h1>Tiefensuche</h1>
-            <canvas id="canvas" width="525" height="540"></canvas>
-            <script src="dfs.js"></script>
+        <div class="search_div">
+            <div id="dfs" class="box">
+                <h1>Tiefensuche</h1>
+                <canvas id="canvas1" width="525" height="540"></canvas>
+                <script src="dfs.js"></script>
+            </div>
+            <div id="bfs" class="box">
+                <h1>Breitensuche</h1>
+                <canvas id="canvas2" width="525" height="540"></canvas>
+                <script src="bfs.js"></script>
+            </div>
+        </div>
+        <div class="button_div">
+            <button id="start_dfs" class="button" type="button">Start</button>
+            <button id="start_bfs" class="button" type="button">Start</button>
         </div>
     </body>
 </html>

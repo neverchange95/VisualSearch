@@ -1,10 +1,36 @@
-#dfs {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 20%;
+body {
+    margin-top: 5%;
+    background: #172118;
 }
 
-#canvas { 
+.search_div {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.button_div {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    margin-right: 250px;
+    margin-left: 280px;
+}
+
+.box {
+    float: left;
+    padding: 20px;
+}
+
+#canvas1, #canvas2 { 
     border: 3px solid black;
+    background: black;
+    border-radius: 15px;
 }
