@@ -5,6 +5,7 @@ var startNodeX;
 var startNodeY;
 var targetNodeX;
 var targetNodeY;
+var running = false;
 
 // s = start, e = end, 0 = wall, 1 = path
 var maze = [
@@ -81,19 +82,24 @@ async function drawMaze() {
             }
         }
     }
-    dfsHelper();
 }
 
 function dfsHelper() {
-    var visited = [];
-    for(var i = 0; i < 34; i++) {
-        var lengthX = [];
-        for(var j = 0; j < 35; j++) {
-            lengthX.push(false);
+    if(!running) {
+        running = true;
+        ctx.clearRect(0,0,can.width,can.height);
+        drawGrid();
+        drawMaze();
+        var visited = [];
+        for(var i = 0; i < 34; i++) {
+            var lengthX = [];
+            for(var j = 0; j < 35; j++) {
+                lengthX.push(false);
+            }
+            visited.push(lengthX);
         }
-        visited.push(lengthX);
+        dfsIter(visited,startNodeX,startNodeY);
     }
-    dfsIter(visited,startNodeX,startNodeY);
 }
 
 async function dfsIter(visited,x,y) {
@@ -125,7 +131,7 @@ async function dfsIter(visited,x,y) {
         }
         
         drawPath(x,y);
-        await sleep(50);
+        await sleep(0);
 
         backtracking = true;
         if(helpY-1 >= 0 && maze[helpY-1][helpX] !== '0' && !visited[helpY-1][helpX]) {
@@ -177,6 +183,7 @@ async function drawFoundPath(path) {
         path.shift();
         await sleep(50);
     }
+    running = false;
 }
 
 function drawPath(x,y) {
