@@ -105,23 +105,11 @@ function bfsHelper() {
 async function bfsIter(visited2,x,y) {
     var stack2 = []; 
     var node2 = [x,y];
-    var foundPath2 = [];
-    var backtracking2 = false;
-    var possibilitys = 0;
-    var backtrackNode = [];
-    var deadlockNode = [];
-    var deadlockNumber = -1;
     stack2.push(node2);
-    foundPath2.unshift(node2);
     while(stack2.length !== 0) {
         node2 = stack2.shift();
         var x = node2[0];
         var y = node2[1];
-
-        if(backtracking2 === true) {
-            backNode = backtrackNode[deadlockNumber];
-            backtrack2(foundPath2,backNode,deadlockNode);
-        }
         
         var helpX = node2[0] - 0.5;
         var helpY = node2[1] - 0.5;
@@ -131,128 +119,59 @@ async function bfsIter(visited2,x,y) {
         if(x === targetNodeX2 && y === targetNodeY2) {
             drawPath2(x,y);
             console.log("Ziel gefunden!");
-            drawFoundPath2(foundPath2);
+            running2 = false;
             break;
         }
         
         drawPath2(x,y);
         await sleep2(100);
 
-        backtracking2 = true;
-        possibilitys = 0;
         if(helpY-1 >= 0 && maze2[helpY-1][helpX] !== '0' && !visited2[helpY-1][helpX]) {
             var newNode = [x,y-1];
-            backtracking2 = false;
             let n = stack2[stack2.length-1];
             if(n !== undefined) {
                 if(n[0] !== newNode[0] || n[1] !== newNode[1]) {
                     stack2.push(newNode);
-                    foundPath2.unshift(newNode);
-                    possibilitys++;
                 }
             } else {
                 stack2.push(newNode);
-                foundPath2.unshift(newNode);
-                possibilitys++;
             }
         } 
         if(helpX+1 < 34 && maze2[helpY][helpX+1] !== '0' && !visited2[helpY][helpX+1]) {
             var newNode = [x+1,y];
-            backtracking2 = false;
             let n = stack2[stack2.length-1];
             if(n !== undefined) {
                 if(n[0] !== newNode[0] || n[1] !== newNode[1]) {
                     stack2.push(newNode);
-                    foundPath2.unshift(newNode);
-                    possibilitys++;
                 }
             } else {
                 stack2.push(newNode);
-                foundPath2.unshift(newNode);
-                possibilitys++;
             }
         } 
         if(helpX-1 >= 0 && maze2[helpY][helpX-1] !== '0' && !visited2[helpY][helpX-1]) {
             var newNode = [x-1,y];
-            backtracking2 = false;
             let n = stack2[stack2.length-1];
             if(n !== undefined) {
                 if(n[0] !== newNode[0] || n[1] !== newNode[1]) {
                     stack2.push(newNode);
-                    foundPath2.unshift(newNode);
-                    possibilitys++;
                 }
             } else {
                 stack2.push(newNode);
-                foundPath2.unshift(newNode);
-                possibilitys++;
             }
         } 
         if(helpY+1 < 34 && maze2[helpY+1][helpX] !== '0' && !visited2[helpY+1][helpX]) {
             var newNode = [x,y+1];
-            backtracking2 = false;
             let n = stack2[stack2.length-1];
             if(n !== undefined) {
                 if(n[0] !== newNode[0] || n[1] !== newNode[1]) {
                     stack2.push(newNode);
-                    foundPath2.unshift(newNode);
-                    possibilitys++;
                 }
             } else {
                 stack2.push(newNode);
-                foundPath2.unshift(newNode);
-                possibilitys++;
             }
-        }
-        if(possibilitys > 1) {
-            nb = [x,y];
-            setTarget2(x,y);
-            backtrackNode.push(nb);
-            console.log(backtrackNode);
-        }
-        if(backtracking2 === true) {
-            deadlockNode = [x,y];
-            setStart2(x,y);
-            deadlockNumber++;
-            console.log(deadlockNumber);
         }
     }
     return;
-}
-
-function backtrack2(path2,backNode,deadlockNode) {
-    var x = deadlockNode[0];
-    var y = deadlockNode[1];
-    var helpX = deadlockNode[0] - 0.5;
-    var helpY = deadlockNode[1] - 0.5;
-    var running = true;
-
-    debugBacktracking(backNode[0],backNode[1]);
-
-    while(running) {
-        if(x !== backNode[0] && y !== backNode[1]) {
-            if(helpY-1 >= 0 && maze2[helpY-1][helpX] !== '0') {
-                y = y-1;
-            } else if(helpX+1 < 34 && maze2[helpY][helpX+1] !== '0') {
-                x = x+1;
-            } else if(helpX-1 >= 0 && maze2[helpY][helpX-1] !== '0') {
-                x = x-1;
-            } else if(helpY+1 < 34 && maze2[helpY+1][helpX] !== '0') {
-                y = y+1;
-            }
-
-            for(var i = 0; i < path2.length; i++) {
-                var pathNode = path2[i];
-                if(pathNode[0] === x && pathNode[1] === y) {
-                    path2.splice(i,1); // remove one element at index i
-                    break;
-                }
-            }
-        } else {
-            running = false;
-        }
-    }
-    return path2;
 }
 
 async function drawFoundPath2(path2) {

@@ -105,18 +105,11 @@ function dfsHelper() {
 async function dfsIter(visited,x,y) {
     var stack = []; 
     var node = [x,y];
-    var foundPath = [];
-    var backtracking = false;
     stack.push(node);
-    foundPath.unshift(node);
     while(stack.length !== 0) {
         node = stack.pop();
         var x = node[0];
         var y = node[1];
-
-        if(backtracking === true) {
-            backtrack(foundPath,x,y);
-        }
         
         var helpX = node[0] - 0.5;
         var helpY = node[1] - 0.5;
@@ -126,65 +119,34 @@ async function dfsIter(visited,x,y) {
         if(x === targetNodeX && y === targetNodeY) {
             drawPath(x,y);
             console.log("Ziel gefunden!");
-            drawFoundPath(foundPath);
+            running = false;
             break;
         }
         
         drawPath(x,y);
-        await sleep(0);
+        await sleep(100);
 
         backtracking = true;
         if(helpY-1 >= 0 && maze[helpY-1][helpX] !== '0' && !visited[helpY-1][helpX]) {
             var newNode = [x,y-1];
-            backtracking = false;
-            foundPath.unshift(newNode);
             stack.push(newNode);
         } 
         if(helpX+1 < 34 && maze[helpY][helpX+1] !== '0' && !visited[helpY][helpX+1]) {
             var newNode = [x+1,y];
-            backtracking = false;
-            foundPath.unshift(newNode);
             stack.push(newNode);
         } 
         if(helpX-1 >= 0 && maze[helpY][helpX-1] !== '0' && !visited[helpY][helpX-1]) {
             var newNode = [x-1,y];
-            backtracking = false;
-            foundPath.unshift(newNode);
             stack.push(newNode);
         } 
         if(helpY+1 < 34 && maze[helpY+1][helpX] !== '0' && !visited[helpY+1][helpX]) {
             var newNode = [x,y+1];
-            backtracking = false;
-            foundPath.unshift(newNode);
             stack.push(newNode);
         }
     }
     return;
 }
 
-function backtrack(path,x,y) {
-    var index = 0;
-    var coordinates = path[index];
-    while((coordinates[0] !== x) || (coordinates[1] !== y)) {
-        path.shift();
-        coordinates = path[index];
-    }
-    return path;
-}
-
-async function drawFoundPath(path) {
-    while(path.length > 0) {
-        var coordinates = path[0];
-        ctx.beginPath();
-        ctx.rect(coordinates[0]*15,coordinates[1]*15,15,15);
-        ctx.fillStyle = "green";
-        ctx.fill();
-        ctx.stroke();
-        path.shift();
-        await sleep(50);
-    }
-    running = false;
-}
 
 function drawPath(x,y) {
     ctx.beginPath();
