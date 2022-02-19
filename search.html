@@ -6,27 +6,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital@1&family=Roboto:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style_search.css"/>
+        <link rel="icon" href="/images/coding.png"/> 
         <title>Suche</title>
     </head>
     <body>
         <h1 class="header_h1">Visuelle Tiefen und Breitensuche</h1>
-        <button id="home_button" class="home_button" type="button" onclick=""><img src="/zuhause.png" width="50" height="50"/></button>
-        <h3>Zurück zur Homepage</h3>
+        <div class="home_div">
+            <button id="home_button" class="home_button" type="button" onclick="location.href='projects.html';"><img src="/images/zuhause.png" width="50" height="50"/></button>
+            <h3>Zurück zur Homepage</h3>
+        </div><br>
         <div class="search_div">
             <div id="dfs" class="box">
                 <h1>Tiefensuche</h1>
-                <canvas id="canvas1" width="525" height="540"></canvas>
+                <canvas class="canvas1" id="canvas1" width="525" height="540"></canvas>
+                <button id="start_dfs" class="button" type="button" onclick="dfsHelper()">Start DFS</button>
                 <script src="dfs.js"></script>
             </div>
             <div id="bfs" class="box">
                 <h1>Breitensuche</h1>
-                <canvas id="canvas2" width="525" height="540"></canvas>
+                <canvas class="canvas2" id="canvas2" width="525" height="540"></canvas>
+                <button id="start_bfs" class="button" type="button" onclick="bfsHelper()">Start BFS</button>
                 <script src="bfs.js"></script>
             </div>
         </div>
-        <div class="button_div">
-            <button id="start_dfs" class="button" type="button" onclick="dfsHelper()">Start DFS</button>
-            <button id="start_bfs" class="button" type="button" onclick="bfsHelper()">Start BFS</button>
-        </div>
+	<br><br><br>
     </body>
 </html>

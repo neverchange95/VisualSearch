@@ -1,58 +1,66 @@
-body {
-    margin-top: 5%;
-    background: #172118;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h3 {
-    font-family: 'Roboto', sans-serif;
-    color: white;
-    margin-left: 100px;
+body {
+    background: #172118;
 }
 
 .header_h1 {
     text-align: center;
     font-family: 'Roboto', sans-serif;
+    font-size: 35px;
     color: white;
-    margin-top: -50px;
-
+    margin-top: 50px;
 }
 
-.search_div {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: 'Roboto', sans-serif;
+.home_div {
+    margin-left: 5%;
+    margin-top: 20px;
 }
 
 .home_button {
     background-color: transparent;
     outline: none;
     border: none;
-    margin-left: 155px;
-    margin-top: -50px;
+    padding-left: 62px;
 }
 
-.button_div {
+.home_div h3 {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.search_div {
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 20px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.search_div h1 {
+    padding-bottom: 20px;
 }
 
 .button {
     font-family: 'Roboto', sans-serif;
-    margin-right: 210px;
-    margin-left: 240px;
     background-color: transparent;
     font-size: 20px;
     color: white;
     border: 2px solid white;
-    border-radius: 15px;
-    display: inline-block;
+    border-radius: 15px;;
+    display: block;
+    margin: 0 auto;
     padding: 5px 20px;
     outline: none;
+    margin-top: 10px;
 }
 
 .button:active {
@@ -66,13 +74,131 @@ h3 {
     }
 }
 
-.box {
-    float: left;
-    padding: 20px;
-}
-
 #canvas1, #canvas2 { 
     border: 3px solid black;
     background: black;
     border-radius: 15px;
+}
+
+
+@media only screen and (max-width: 1100px) {
+    .home_div {
+        all:unset;
+        display: block;
+        text-align: center; 
+        margin-top: 40px;
+    }
+
+    .home_button {
+        all:unset;
+        background-color: transparent;
+        outline: none;
+        border: none;
+    }
+    
+    .search_div {
+        all: unset;
+        text-align: center;
+        display: block;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .search_div h1 {
+        padding-top: 50px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    #canvas1 {
+       width: 400px;
+       height: 400px;
+    }
+
+    #canvas2 {
+        width: 400px;
+        height: 400px;
+    }
+
+    .header_h1 {
+        font-size: 25px;
+    }
+
+    .home_div h3 {
+        font-size: 16px;
+    }
+
+    .search_div h1 {
+        font-size: 24px;
+    }
+
+    .button {
+        font-size: 17px;
+    }
+}
+
+@media only screen and (max-width: 417px) {
+    #canvas1 {
+       width: 350px;
+       height: 350px;
+    }
+
+    #canvas2 {
+        width: 350px;
+        height: 350px;
+    }
+
+    .header_h1 {
+        font-size: 20px;
+    }
+
+    .home_div h3 {
+        font-size: 14px;
+    }
+
+    .search_div h1 {
+        font-size: 19px;
+    }
+
+    .button {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 367px) {
+    #canvas1 {
+       width: 300px;
+       height: 300px;
+    }
+
+    #canvas2 {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media only screen and (max-width: 307px) {
+    #canvas1 {
+       width: 250px;
+       height: 250px;
+    }
+
+    #canvas2 {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media only screen and (max-width: 257px) {
+    #canvas1 {
+       width: 200px;
+       height: 200px;
+    }
+
+    #canvas2 {
+        width: 200px;
+        height: 200px;
+    }
 }
